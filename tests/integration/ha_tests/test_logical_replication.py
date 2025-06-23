@@ -351,9 +351,7 @@ async def _create_test_table(
     try:
         for attempt in Retrying(stop=stop_after_delay(120), wait=wait_fixed(3), reraise=True):
             with attempt:
-                connection = psycopg2.connect(
-                    connection_string
-                )
+                connection = psycopg2.connect(connection_string)
         connection.autocommit = True
         with connection.cursor() as cursor:
             cursor.execute(f"CREATE TABLE {table_name} (test_column text);")
@@ -376,9 +374,7 @@ async def _insert_test_data(
     try:
         for attempt in Retrying(stop=stop_after_delay(120), wait=wait_fixed(3), reraise=True):
             with attempt:
-                connection = psycopg2.connect(
-                    connection_string
-                )
+                connection = psycopg2.connect(connection_string)
         connection.autocommit = True
         with connection.cursor() as cursor:
             cursor.execute(
@@ -404,9 +400,7 @@ async def _check_test_data(
     try:
         for attempt in Retrying(stop=stop_after_delay(120), wait=wait_fixed(3), reraise=True):
             with attempt:
-                connection = psycopg2.connect(
-                    connection_string
-                )
+                connection = psycopg2.connect(connection_string)
         with connection.cursor() as cursor:
             cursor.execute(
                 f"SELECT EXISTS (SELECT 1 FROM {table_name} WHERE test_column = %s);",

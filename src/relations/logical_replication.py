@@ -11,7 +11,6 @@ import logging
 from typing import (
     TYPE_CHECKING,
 )
-from tenacity import Retrying, stop_after_delay, wait_fixed
 
 from ops import (
     BlockedStatus,
@@ -26,6 +25,7 @@ from ops import (
     SecretChangedEvent,
     SecretNotFoundError,
 )
+from tenacity import Retrying, stop_after_delay, wait_fixed
 
 from utils import new_password
 
@@ -217,7 +217,9 @@ class PostgreSQLLogicalReplication(Object):
                 )
             else:
                 publication_name = publication["publication-name"]
-                for attempt in Retrying(stop=stop_after_delay(120), wait=wait_fixed(3), reraise=True):
+                for attempt in Retrying(
+                    stop=stop_after_delay(120), wait=wait_fixed(3), reraise=True
+                ):
                     with attempt:
                         self.charm.postgresql.create_subscription(
                             subscription_name,

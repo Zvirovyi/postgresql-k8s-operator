@@ -47,8 +47,8 @@ from charms.postgresql_k8s.v0.postgresql import (
     REQUIRED_PLUGINS,
     PostgreSQL,
     PostgreSQLEnableDisableExtensionError,
-    PostgreSQLListGroupsError,
     PostgreSQLGetCurrentTimelineError,
+    PostgreSQLListGroupsError,
     PostgreSQLUpdateUserPasswordError,
 )
 from charms.postgresql_k8s.v0.postgresql_tls import PostgreSQLTLS
